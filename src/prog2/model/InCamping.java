@@ -1,6 +1,6 @@
 package prog2.model;
 
-import prog2.vista.ExcepcioCamping;
+import prog2.vista.excepcions.ExcepcioCamping;
 
 /**
  * Interfície que defineix les operacions bàsiques per gestionar un càmping.

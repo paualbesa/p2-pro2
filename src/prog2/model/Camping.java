@@ -1,11 +1,15 @@
 package prog2.model;
 
-import prog2.vista.ExcepcioCamping;
-import prog2.vista.ExcepcioReserva;
+import prog2.model.accessos.*;
+import prog2.model.allotjaments.*;
+import prog2.model.clients.InLlistaClients;
+import prog2.model.clients.LlistaClients;
+import prog2.model.reserves.InLlistaReserves;
+import prog2.model.reserves.LlistaReserves;
+import prog2.vista.excepcions.ExcepcioCamping;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Camping implements InCamping{
     private String nom;
