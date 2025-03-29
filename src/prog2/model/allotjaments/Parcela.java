@@ -8,8 +8,8 @@ public class Parcela extends Allotjament {
     private static final long ESTADA_MINIMA_ALTA = 4;
     private static final long ESTADA_MINIMA_BAIXA = 2;
 
-    public Parcela(String nom, String id, float mida, boolean connexioElectrica) {
-        super(nom, id, ESTADA_MINIMA_ALTA, ESTADA_MINIMA_BAIXA);
+    public Parcela(String nom, String id, boolean estat, String estatIluminacio, float mida, boolean connexioElectrica) {
+        super(nom, id, ESTADA_MINIMA_ALTA, ESTADA_MINIMA_BAIXA, estat, estatIluminacio);
         this.mida = mida;
         this.connexioElectrica = connexioElectrica;
     }

@@ -7,8 +7,8 @@ public class MobilHome extends Casa {
     private static final long ESTADA_MINIMA_ALTA = 5;
     private static final long ESTADA_MINIMA_BAIXA = 3;
 
-    public MobilHome(String nom, String id, String mida, int numHabitacions, int numPlacesPersones, boolean terrassaBarbacoa) {
-        super(nom, id, mida, numHabitacions, numPlacesPersones);
+    public MobilHome(String nom, String id, boolean estat, String estatIluminacio, float mida, int numHabitacions, int numPlacesPersones, boolean terrassaBarbacoa) {
+        super(nom, id, estat, estatIluminacio, mida, numHabitacions, numPlacesPersones);
         super.setEstadaMinima(ESTADA_MINIMA_ALTA, ESTADA_MINIMA_BAIXA);
         this.terrassaBarbacoa = terrassaBarbacoa;
     }

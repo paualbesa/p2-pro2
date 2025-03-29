@@ -5,8 +5,10 @@ public abstract class Allotjament implements InAllotjament {
     private String id;
     private long estadaMinimaAlta;
     private long estadaMinimaBaixa;
+    boolean estat;
+    String estatIluminacio;
 
-    public Allotjament(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa) {
+    public Allotjament(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa, boolean estat, String estatIluminacio) {
         setNom(nom);
         setId(id);
         setEstadaMinima(estadaMinimaAlta, estadaMinimaBaixa);
@@ -54,8 +56,10 @@ public abstract class Allotjament implements InAllotjament {
     public boolean equals(Object o) {
         Allotjament accommodation = (Allotjament) o;
         return accommodation.getId().equals( this.getId() ); //esta invocación a equals es al de la clase String.
+
     }
 
+    @Override
     public String toString() {
         return "Nom=" + getNom() + ", Id=" + getId() + ", estada mínima en temp ALTA: " + estadaMinimaAlta + ", estada mínima en temp BAIXA: " + estadaMinimaBaixa + ".";
     }

@@ -10,8 +10,8 @@ public class Bungalow extends Casa {
     private static final long ESTADA_MINIMA_ALTA = 7;
     private static final long ESTADA_MINIMA_BAIXA = 4;
 
-    public Bungalow(String nom, String id, String mida, int numHabitacions, int numPlacesPersones, int numPlacesParquing, boolean isTerrassa, boolean isTV, boolean isAireFred) {
-        super(nom, id, mida, numHabitacions, numPlacesPersones);
+    public Bungalow(String nom, String id, boolean estat, String estatIluminacio, float mida, int numHabitacions, int numPlacesPersones, int numPlacesParquing, boolean isTerrassa, boolean isTV, boolean isAireFred) {
+        super(nom, id, estat, estatIluminacio, mida, numHabitacions, numPlacesPersones);
         super.setEstadaMinima(ESTADA_MINIMA_ALTA, ESTADA_MINIMA_BAIXA);
         this.numPlacesParquing = numPlacesParquing;
         this.isTerrassa = isTerrassa;
