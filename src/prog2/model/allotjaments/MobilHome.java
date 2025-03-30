@@ -29,7 +29,7 @@ public class MobilHome extends Casa {
 
     @Override
     public void tancarAllotjament(Incidencia in) {
-
+        
     }
 
     @Override

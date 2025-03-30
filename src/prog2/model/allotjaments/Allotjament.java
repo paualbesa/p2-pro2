@@ -12,6 +12,8 @@ public abstract class Allotjament implements InAllotjament {
         setNom(nom);
         setId(id);
         setEstadaMinima(estadaMinimaAlta, estadaMinimaBaixa);
+        this.estat = estat;
+        this.estatIluminacio = estatIluminacio;
     }
 
     public long getEstadaMinima(InAllotjament.Temp temp) {
@@ -49,6 +51,23 @@ public abstract class Allotjament implements InAllotjament {
     public boolean isDisponible() {
         return estat;
     }
+
+    public void setEstat(boolean estat) {
+        this.estat = estat;
+    }
+
+    public boolean getEstat() {
+        return estat;
+    }
+
+    public String getEstatIluminacio() {
+        return estatIluminacio;
+    }
+
+    public void setEstatIluminacio(String estatIluminacio) {
+        this.estatIluminacio = estatIluminacio;
+    }
+
 
 
     @Override

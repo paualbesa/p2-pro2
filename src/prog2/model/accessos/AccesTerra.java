@@ -12,4 +12,8 @@ public class AccesTerra extends Acces{
     public boolean isAccessibilitat() {
         return false;
     }
+
+    public float getLongitud() {
+        return longitud;
+    }
 }
