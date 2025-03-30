@@ -8,5 +8,8 @@ public class AccesTerra extends Acces{
         this.longitud = longitud;
     }
 
-
+    @Override
+    public boolean isAccessibilitat() {
+        return false;
+    }
 }

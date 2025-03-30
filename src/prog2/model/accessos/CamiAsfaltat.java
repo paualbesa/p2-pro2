@@ -7,6 +7,6 @@ public class CamiAsfaltat extends AccesAsfaltat{
 
     @Override
     public boolean isAccessibilitat() {
-        return false;
+        return super.isAccessibilitat();
     }
 }

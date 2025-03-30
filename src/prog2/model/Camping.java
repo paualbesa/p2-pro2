@@ -4,6 +4,9 @@ import prog2.model.accessos.*;
 import prog2.model.allotjaments.*;
 import prog2.model.clients.InLlistaClients;
 import prog2.model.clients.LlistaClients;
+import prog2.model.incidencies.InLlistaIncidencies;
+import prog2.model.incidencies.Incidencia;
+import prog2.model.incidencies.LlistaIncidencies;
 import prog2.model.reserves.InLlistaReserves;
 import prog2.model.reserves.LlistaReserves;
 import prog2.vista.excepcions.ExcepcioCamping;
@@ -17,12 +20,15 @@ public class Camping implements InCamping{
     private InLlistaAllotjaments llistaAllotjaments;
     private InLlistaClients llistaClients;
     private InLlistaAccessos llistaAccessos;
+    private InLlistaIncidencies llistaIncidencies;
 
     public Camping(String nom){
         this.nom = nom;
         this.llistaReserves = new LlistaReserves();
         this.llistaAllotjaments = new LlistaAllotjaments();
         this.llistaClients = new LlistaClients();
+        this.llistaAccessos = new LlistaAccessos();
+        this.llistaIncidencies = new LlistaIncidencies();
     }
 
     public static InAllotjament.Temp getTemporada(LocalDate date) {
@@ -37,42 +43,77 @@ public class Camping implements InCamping{
 
     @Override
     public String getNomCamping() {
-        return "";
+        return nom;
     }
 
     @Override
     public String llistarAllotjaments(String estat) throws ExcepcioCamping {
-        return "";
+        try{
+            return llistaAllotjaments.llistarAllotjaments(estat);
+        } catch (ExcepcioCamping e){
+            throw new ExcepcioCamping("Error al llistar els allotjaments.");
+        }
     }
 
     @Override
     public String llistarAccessos(String infoEstat) throws ExcepcioCamping {
-        return "";
+        try{
+            if(infoEstat.equals("Obert")){
+                return llistaAccessos.llistarAccessos(true);
+            }
+            else if(infoEstat.equals("Tancat")){
+                return llistaAccessos.llistarAccessos(false);
+            }
+            else{
+                throw new ExcepcioCamping("");
+            }
+        }
+        catch (ExcepcioCamping e){
+            return e.getMessage();
+        }
     }
 
     @Override
-    public String llistarIncidencies() throws ExcepcioCamping {
-        return "";
+    public String llistarIncidencies() {
+        try {
+            return llistaIncidencies.llistarIncidencies();
+        } catch (ExcepcioCamping e) {
+            return e.getMessage();
+        }
     }
 
     @Override
     public void afegirIncidencia(int num, String tipus, String idAllotjament, String data) throws ExcepcioCamping {
-
+        Allotjament allotjament = llistaAllotjaments.getAllotjament(idAllotjament);
+        llistaIncidencies.afegirIncidencia(num, tipus, allotjament, data);
     }
 
     @Override
     public void eliminarIncidencia(int num) throws ExcepcioCamping {
-
+        Incidencia incidencia = llistaIncidencies.getIncidencia(num);
+        llistaIncidencies.eliminarIncidencia(incidencia);
     }
 
     @Override
     public int calculaAccessosAccessibles() {
-        return 0;
+        int count = 0;
+        try {
+            String accessos = llistaAccessos.llistarAccessos(true);
+            String[] lines = accessos.split("\n");
+            count = lines.length;
+        } catch (ExcepcioCamping e) {
+            return 0;
+        }
+        return count;
     }
 
     @Override
     public float calculaMetresQuadratsAsfalt() {
-        return 0;
+        try {
+            return llistaAccessos.calculaMetresQuadratsAsfalt();
+        } catch (ExcepcioCamping e) {
+            return 0;
+        }
     }
 
     @Override

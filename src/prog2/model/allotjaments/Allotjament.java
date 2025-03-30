@@ -46,18 +46,10 @@ public abstract class Allotjament implements InAllotjament {
         this.nom = nom;
     }
 
-    public void setEstadaMinima(int alta, int baixa) {
-        estadaMinimaAlta = alta;
-        estadaMinimaBaixa = baixa;
+    public boolean isDisponible() {
+        return estat;
     }
 
-    //we need to write: equals(Object o) instead of equals(Allotjament o) because to override we need to write de exactly same head of the function.
-    @Override
-    public boolean equals(Object o) {
-        Allotjament accommodation = (Allotjament) o;
-        return accommodation.getId().equals( this.getId() ); //esta invocación a equals es al de la clase String.
-
-    }
 
     @Override
     public String toString() {

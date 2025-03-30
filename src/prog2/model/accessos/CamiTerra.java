@@ -5,9 +5,8 @@ public class CamiTerra extends AccesTerra{
         super(nom, estat, longitud);
     }
 
-
     @Override
     public boolean isAccessibilitat() {
-        return false;
+        return super.isAccessibilitat();
     }
 }
