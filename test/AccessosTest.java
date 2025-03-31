@@ -14,8 +14,6 @@ public class AccessosTest {
 
     @BeforeEach
     void setUp() {
-        accesAsfaltat = new AccesAsfaltat("Acces Asfaltat", true, 5.0f);
-        accesTerra = new AccesTerra("Acces Terra", true, 10.0f);
         camiAsfaltat = new CamiAsfaltat("Cami Asfaltat", true, 3.0f);
         camiTerra = new CamiTerra("Cami Terra", true, 8.0f);
         carreteraAsfaltada = new CarreteraAsfaltada("Carretera Asfaltada", true, 6.0f, 20.0f);

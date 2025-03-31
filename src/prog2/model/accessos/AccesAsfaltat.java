@@ -1,6 +1,6 @@
 package prog2.model.accessos;
 
-public class AccesAsfaltat extends Acces{
+public abstract class  AccesAsfaltat extends Acces{
     private float asfalt;
 
     public AccesAsfaltat(String nom, boolean estat, float asfalt){

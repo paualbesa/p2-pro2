@@ -12,6 +12,7 @@ import prog2.model.reserves.LlistaReserves;
 import prog2.vista.excepcions.ExcepcioCamping;
 
 
+import java.io.*;
 import java.time.LocalDate;
 
 public class Camping implements InCamping{
@@ -118,8 +119,86 @@ public class Camping implements InCamping{
 
     @Override
     public void save(String camiDesti) throws ExcepcioCamping {
+        File myFile = new File( camiDesti);
+
+        //els declarem a fora del try per tal de poder fer-los servir al bloc final pero tancar-los.
+        //Tancar-los a dins del try no és recomanable degut a que si salta l'excepció mai no es tancaran.
+        FileOutputStream fis = null;
+        ObjectOutputStream oos = null;
+
+        /*
+        Un flux d'entrada (input stream), és una interfície a una font de dades.
+        A Java tenim:
+            System.in: que és un flux d'entrada que llegeix des de teclat.
+            objecte de la classe FileInputStream: que és un flux d'entrada que llegeix des d'un fitxer.
+         */
+        try{
+            fis = new FileOutputStream( myFile);
+            oos = new ObjectOutputStream( fis);
+            // Llegim un objecte (serialitzat) des del fitxer
+            oos.writeObject( this);
+
+            System.out.println("S'ha escrit correctament l'objecte al fitxer.");
+        }
+        catch( Exception myExcep){
+            throw new ExcepcioCamping("Error al llegir el fitxer: " + myExcep.getMessage());
+        }
+        finally{
+            //tanquem els input stream:
+
+            /*
+            Fem un altre try-catch degut a que en fer close() podríem generar d'altres excepcions com ara
+            si no tenim permisos per accedeir a l'arxiu...
+             */
+            try{
+                /*
+                fem aquestes comprovacions per a no generar una altre excepció (de la classe NullPointerException
+                ja que es podria solapar amb la que podria vindre del try d'adalt i embolicar-nos en debugar.
+                */
+                if(oos != null){
+                    oos.close();
+                }
+                if(fis != null) {
+                    fis.close();
+                }
+            }
+            catch (IOException myExcep2){
+                System.err.println("Error al tancar els fluxos: " + myExcep2.getMessage() );
+            }
+        }
 
     }
+
+
+    public static Camping load(String camiOrigen) throws ExcepcioCamping {
+        File myFile = new File(camiOrigen);
+
+        // Declarem els fluxos fora del `try` per poder tancar-los al bloc `finally`
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+
+        try {
+            fis = new FileInputStream(myFile); // Obrim el flux d'entrada al fitxer
+            ois = new ObjectInputStream(fis); // Obrim el flux per deserialitzar objectes
+
+            // Llegim un objecte (serialitzat) des del fitxer
+            Camping campingCarregat = (Camping) ois.readObject(); // Casting a la classe Camping
+
+            System.out.println("S'ha carregat correctament l'objecte del fitxer.");
+            return campingCarregat; // Retornem el càmping carregat
+        } catch (Exception myExcep) {
+            throw new ExcepcioCamping("Error al carregar el fitxer: " + myExcep.getMessage());
+        } finally {
+            // Tanquem manualment els fluxos
+            try {
+                if (ois != null) ois.close();
+                if (fis != null) fis.close();
+            } catch (IOException myExcep2) {
+                System.err.println("Error al tancar els fluxos: " + myExcep2.getMessage());
+            }
+        }
+    }
+
 
     @Override
     public void inicialitzaDadesCamping() {
